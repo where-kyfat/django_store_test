@@ -1,0 +1,50 @@
+services:
+  db_store:
+    image: postgres:14.7
+    environment:
+      POSTGRES_PASSWORD: postgres
+    command: -p 5433
+    expose:
+      - 5433
+
+  store:
+    build: .
+    volumes:
+      - ./store-app:/app
+    working_dir: /app
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8001:8000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db_store
+      - POSTGRES_PORT=5433
+    depends_on:
+      - db_store
+
+  db_warehouse:
+    image: postgres:14.7
+    environment:
+      POSTGRES_PASSWORD: postgres
+    command: -p 5434
+    expose:
+      - 5434
+
+  warehouse:
+    build: .
+    volumes:
+      - ./warehouse-app:/app
+    working_dir: /app
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8002:8000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db_warehouse
+      - POSTGRES_PORT=5434
+    depends_on:
+      - db_warehouse
