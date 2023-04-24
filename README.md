@@ -12,7 +12,7 @@ This is a technical requirement for this project:
 
 
 ## Requirements
-- For deploy this application a docker-engine is needed
+- For deploy this application a docker-engine is needed.
 
 ## Deploy
 To deploy this application, you need to perform the following steps:
@@ -29,5 +29,5 @@ When you connected to the container, the following commands should be executed (
 
 - `docker-compose start` - starts application;
 - `docker-compose stop` - stops;
-- [http://localhost:8001/admin]() - access to the admin panel of the app store;
-- [http://localhost:8002/admin]() - access to the admin panel of the app store.
+- http://localhost:8001/admin - access to the admin panel of the app store;
+- http://localhost:8002/admin - access to the admin panel of the app store.
